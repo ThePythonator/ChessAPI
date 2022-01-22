@@ -1,3 +1,6 @@
+from Player import Player
+from Coord import Coord
+
 class Moves:
     @staticmethod
     def filter_moves(piece, board, moves):
@@ -18,14 +21,14 @@ class Moves:
             if piece.type() == Piece.Type.king():
                 # Is this king in check?
 
-                for p in board.get_pieces(opposite_type(king_type)):
+                for p in board.get_pieces(Player.opposite_type(king_type)):
                     if piece.position in p.moves(grid, False):
                         return False
 
         return True
 
     @staticmethod
-    def pawn(piece, board, filter_checks):
+    def Pawn(piece, board, filter_checks):
         # If filter is True, moves which move into check, or remain in check are removed.
         moves = []
         if not board.on_board(piece.position + piece.player().direction_coord()):
@@ -49,15 +52,15 @@ class Moves:
         return Moves.filter_moves(piece, board, moves) if filter_checks else moves
 
     @staticmethod
-    def bishop(piece, board, filter_checks):
+    def Bishop(piece, board, filter_checks):
         return Moves._straight_line_moves(piece, board, filter_checks, [Coord(1, 1), Coord(1, -1), Coord(-1, -1), Coord(-1, 1)])
 
     @staticmethod
-    def rook(piece, board, filter_checks):
+    def Rook(piece, board, filter_checks):
         return Moves._straight_line_moves(piece, board, filter_checks, [Coord(1, 0), Coord(0, 1), Coord(0, -1), Coord(-1, 0)])
 
     @staticmethod
-    def knight(piece, board, filter_checks):
+    def Knight(piece, board, filter_checks):
         moves = []
 
         for offset in [Coord(2, 1), Coord(-2, 1), Coord(-2, -1), Coord(2, -1)]:
@@ -73,11 +76,11 @@ class Moves:
         return Moves.filter_moves(piece, board, moves) if filter_checks else moves
 
     @staticmethod
-    def queen(piece, board, filter_checks):
+    def Queen(piece, board, filter_checks):
         return Moves.bishop(piece, board, filter_checks) + Moves.rook(piece, board, filter_checks)
 
     @staticmethod
-    def king(piece, board, filter_checks):
+    def King(piece, board, filter_checks):
         moves = []
 
         for offset in [Coord(1, 0), Coord(1, 1), Coord(0, 1), Coord(-1, 1), Coord(-1, 0), Coord(-1, -1), Coord(0, -1), Coord(1, -1)]:
@@ -100,6 +103,14 @@ class Moves:
                     pass # Currently don't support castling
 
         return Moves.filter_moves(piece, board, moves) if filter_checks else moves
+
+    @staticmethod
+    def Null(piece, board, filter_checks):
+        return []
+
+    @staticmethod
+    def MoveTable():
+        return [Moves.Null, Moves.Pawn, Moves.Knight, Moves.Bishop, Moves.Rook, Moves.Queen, Moves.King]
 
     @staticmethod
     def _straight_line_moves(piece, board, filter_checks, directions):
