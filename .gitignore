@@ -1,4 +1,2 @@
-# Executables
-*.exe
-*.out
-*.app
+.vs/
+out/
