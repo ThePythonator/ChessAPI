@@ -32,3 +32,8 @@ class Piece:
 
     def move_count(self):
         return len(moves)
+
+    def copy(self):
+        piece = Piece(self._type)
+        piece._moves = self._moves.copy()
+        return piece

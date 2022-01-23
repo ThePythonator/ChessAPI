@@ -1,3 +1,5 @@
+from Coord import Coord
+
 class Player:
     class Type:
         @staticmethod
@@ -18,3 +20,6 @@ class Player:
 
     def type(self):
         return self._type
+
+    def direction_coord(self):
+        return Coord(0, 1 if self._type == Type.White() else -1 if self._type == Type.Black() else 0)

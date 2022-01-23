@@ -10,7 +10,7 @@ class Moves:
             temp = board.copy()
             temp.move(piece.position, move)
 
-            if not Moves.in_check(board, Player.opposite_type(piece.player().type())):
+            if not Moves.in_check(board, Player.Type.opposite_type(piece.player().type())):
                 filtered_moves.append(move)
         
         return filtered_moves
@@ -21,7 +21,7 @@ class Moves:
             if piece.type() == Piece.Type.king():
                 # Is this king in check?
 
-                for p in board.get_pieces(Player.opposite_type(king_type)):
+                for p in board.get_pieces(Player.Type.opposite_type(player_type)):
                     if piece.position in p.moves(grid, False):
                         return False
 
@@ -41,7 +41,7 @@ class Moves:
                 continue
 
             if not board.empty_at(move):
-                if board.at(move).player().type() == Player.opposite_type(piece.player().type()):
+                if board.at(move).player().type() == Player.Type.opposite_type(piece.player().type()):
                     # Pieces are on opposite teams
                     moves.append(move)
 
@@ -69,7 +69,7 @@ class Moves:
             if not board.on_board(piece.position + piece.player().direction_coord()):
                 continue
 
-            if board.empty_at(move) or board.at(move).player().type() == Player.opposite_type(piece.player().type()):
+            if board.empty_at(move) or board.at(move).player().type() == Player.Type.opposite_type(piece.player().type()):
                 # Pieces are on opposite teams, or space is empty
                 moves.append(move)
 
@@ -89,7 +89,7 @@ class Moves:
             if not board.on_board(piece.position + piece.player().direction_coord()):
                 continue
 
-            if board.empty_at(move) or board.at(move).player().type() == Player.opposite_type(piece.player().type()):
+            if board.empty_at(move) or board.at(move).player().type() == Player.Type.opposite_type(piece.player().type()):
                 # Pieces are on opposite teams, or space is empty
                 moves.append(move)
 
@@ -129,7 +129,7 @@ class Moves:
                 elif board.empty_at(temp):
                     moves.append(move)
 
-                elif board.at(move).player().type() == Player.opposite_type(piece.player().type()):
+                elif board.at(move).player().type() == Player.Type.opposite_type(piece.player().type()):
                     moves.append(move)
                     end = True
 
