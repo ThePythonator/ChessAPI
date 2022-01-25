@@ -17,31 +17,25 @@ class Chess:
         for p, player in enumerate([self._white, self._black]):
             for i in range(8):
                 # Pawns first
-                piece = Piece(Piece.Type.Pawn(), Coord(i, 1 + p*5), player)
-                self._board.add_piece(piece)
+                self._board.add_piece(Piece(Piece.Type.Pawn(), Coord(i, 1 + p*5), player))
 
             # Minors
             for i in range(2):
                 # Rooks
-                piece = Piece(Piece.Type.Rook(), Coord(i*7, p*7), player)
-                self._board.add_piece(piece)
+                self._board.add_piece(Piece(Piece.Type.Rook(), Coord(i*7, p*7), player))
 
                 # Knights
-                piece = Piece(Piece.Type.Knight(), Coord(1 + i*5, p*7), player)
-                self._board.add_piece(piece)
+                self._board.add_piece(Piece(Piece.Type.Knight(), Coord(1 + i*5, p*7), player))
 
                 # Bishops
-                piece = Piece(Piece.Type.Bishop(), Coord(2 + i*3, p*7), player)
-                self._board.add_piece(piece)
+                self._board.add_piece(Piece(Piece.Type.Bishop(), Coord(2 + i*3, p*7), player))
 
             # Queen
             # We assume square 0, 0 is black
-            piece = Piece(Piece.Type.Queen(), Coord(3, p*7), player)
-            self._board.add_piece(piece)
+            self._board.add_piece(Piece(Piece.Type.Queen(), Coord(3, p*7), player))
 
             # King
-            piece = Piece(Piece.Type.King(), Coord(4, p*7), player)
-            self._board.add_piece(piece)
+            self._board.add_piece(Piece(Piece.Type.King(), Coord(4, p*7), player))
 
     def turn(self):
         if self._move_number % 2 == 0:
