@@ -17,9 +17,11 @@ class Piece:
         @staticmethod
         def King(): return 6
 
-    def __init__(self, piece_type):
+    def __init__(self, piece_type, position, player):
         self._type = piece_type
         self._moves = []
+        self.position = position
+        self._player = player
 
     def player(self):
         return self._player
